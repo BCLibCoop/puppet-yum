@@ -34,7 +34,7 @@ class yum::repos(
 		force => true,		# also purge subdirs and links
 		owner => root,
 		group => root,
-		mode => 644,		# u=rw,go=r
+		mode => '0644',		# u=rw,go=r
 	}
 }
 
@@ -66,7 +66,7 @@ define yum::repos::repo(
 		content => template('yum/repo.erb'),
 		owner => root,
 		group => root,
-		mode => 644,	# should be readable by all so users can yum X
+		mode => '0644',	# should be readable by all so users can yum X
 		require => File['/etc/yum.repos.d/'],
 		ensure => $ensure,
 	}
@@ -91,7 +91,7 @@ define yum::repos::gpgkey(
 	@@file { "${f}":
 		tag => "${tag}",
 		content => "${content}",
-		owner => root, group => root, mode => 644, backup => false,
+		owner => root, group => root, mode => '0644', backup => false,
 		ensure => present,
 	}
 }
